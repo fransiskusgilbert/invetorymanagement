@@ -128,23 +128,17 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
         </div>
         <div class="nav-side">
             <ul>
-                <li><span><i class="fa-solid fa-house"></i></span><a href="halaman_dashboard.php"
+                <li><span><i class="fa-solid fa-house"></i></span><a href="halaman_dashboard_admin.php"
                         id="dashboardMenu">Dashboard</a></li>
-                <li><span><i class="fa-solid fa-notes-medical"></i></span><a href="halaman_databarang_logs.php">Log
-                        Obat</a>
-                </li>
-                <li><span><i class="fa-regular fa-money-bill-1"></i></span><a href="halaman_datapenjualan_logs.php">Log
-                        Penjualan</a></li>
-                <li><span><i class="fa-solid fa-people-arrows"></i></span><a href="halaman_dataperusahaan_logs.php">Log
-                        Perusahaan</a></li>
                 <li><span><i class="fa-solid fa-user"></i></span><a href="halaman_datapegawai.php">Data Pegawai</a></li>
-                <li><span><i class="fa-solid fa-notes-medical"></i></span><a
-                        href="halaman_databarangkeluar_logs.php">Log
-                        Barang Keluar</a></li>
                 <li><span><i class="fa-solid fa-power-off"></i></span><a href="login_proses/logout_proses.php"
                         onclick="return confirm('Apakah anda yakin ingin keluar?')">Keluar</a>
                 </li>
+                <li>
+                    <i class="fa-solid fa-angles-left" id="collapse"></i>
+                </li>
             </ul>
+            <script src="js/collapse.js"></script>
         </div>
     </nav>
     <div class="container">
@@ -181,9 +175,30 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                             <i class="fa-solid fa-capsules"></i>
                         </div>
                     </div>
-                    <a href="halaman_databarang.php" class="link-to">
-                        <p>Lihat Data Obat</p>
-                    </a>
+                </div>
+                <?php
+                $sqlCountObatKeluar = "SELECT SUM(databarangkeluar_stockKeluar) as totalKeluar from dataobatkeluar_tb";
+                $fetchObatKeluar = mysqli_query($conn, $sqlCountObatKeluar);
+
+                if ($fetchObatKeluar) {
+                    $result = mysqli_fetch_assoc($fetchObatKeluar);
+                    $totalObatKeluar = $result['totalKeluar'];
+                } else {
+                    $totalObatKeluar = "Error!";
+                }
+                ?>
+                <div class="box-items">
+                    <div class="item-desc">
+                        <div class="text-desc">
+                            <p>
+                                <?php echo $totalObatKeluar; ?>
+                            </p>
+                            <p>Total Obat Keluar</p>
+                        </div>
+                        <div class="item-logo">
+                            <i class="fa-solid fa-capsules"></i>
+                        </div>
+                    </div>
                 </div>
                 <?php
                 $sqlSumTotalPenjualan = "SELECT SUM(datapenjualan_totalPenjualan) as totalP FROM datapenjualan_tb";
@@ -199,7 +214,7 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                 <div class="box-items">
                     <div class="item-desc">
                         <div class="text-desc">
-                            <p style="font-size: 25px;">
+                            <p style="font-size: 30px;">
                                 <?php echo 'Rp ' . number_format($totalSum, 0, ',', '.'); ?>
                             </p>
                             <p>Total Penjualan</p>
@@ -208,9 +223,6 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                             <i class="fa-solid fa-cash-register"></i>
                         </div>
                     </div>
-                    <a href="" class="link-to">
-                        <p>Lihat Data Penjualan</p>
-                    </a>
                 </div>
                 <?php
                 $sqlCountPerusahaan = "SELECT COUNT(DISTINCT perusahaan_kode) as total from perusahaan_tb";
@@ -235,9 +247,6 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                             <i class="fa-solid fa-users"></i>
                         </div>
                     </div>
-                    <a href="" class="link-to">
-                        <p>Lihat Data Perusahaan</p>
-                    </a>
                 </div>
                 <?php
 
@@ -263,13 +272,11 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                             <i class="fa-solid fa-users"></i>
                         </div>
                     </div>
-                    <a href="" class="link-to">
-                        <p>Lihat Data User Online</p>
-                    </a>
                 </div>
-                <div id="graphObat" style="height: 200px; width: auto;"></div>
-                <div id="chartContainer" style="height: 200px; width: 95%;"></div>
+
             </div>
+            <div id="graphObat" style="height: 200px; width: auto;"></div>
+            <div id="chartContainer" style="height: 200px; width: 95%;"></div>
             <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         </div>
     </div>

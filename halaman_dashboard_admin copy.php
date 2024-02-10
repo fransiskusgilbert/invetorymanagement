@@ -177,9 +177,6 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                             <i class="fa-solid fa-capsules"></i>
                         </div>
                     </div>
-                    <a href="halaman_databarang.php" class="link-to">
-                        <p>Lihat Data Obat</p>
-                    </a>
                 </div>
                 <?php
                 $sqlSumTotalPenjualan = "SELECT SUM(datapenjualan_totalPenjualan) as totalP FROM datapenjualan_tb";
@@ -204,9 +201,6 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                             <i class="fa-solid fa-cash-register"></i>
                         </div>
                     </div>
-                    <a href="" class="link-to">
-                        <p>Lihat Data Penjualan</p>
-                    </a>
                 </div>
                 <?php
                 $sqlCountPerusahaan = "SELECT COUNT(DISTINCT perusahaan_kode) as total from perusahaan_tb";
@@ -231,9 +225,6 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                             <i class="fa-solid fa-users"></i>
                         </div>
                     </div>
-                    <a href="" class="link-to">
-                        <p>Lihat Data Perusahaan</p>
-                    </a>
                 </div>
                 <?php
 
@@ -259,9 +250,7 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                             <i class="fa-solid fa-users"></i>
                         </div>
                     </div>
-                    <a href="" class="link-to">
-                        <p>Lihat Data User Online</p>
-                    </a>
+
                 </div>
                 <div id="graphObat" style="height: 200px; width: auto;"></div>
                 <div id="chartContainer" style="height: 200px; width: 95%;"></div>
