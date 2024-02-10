@@ -43,20 +43,15 @@ if (!isset($_SESSION["login_admin"])) {
         </div>
         <div class="nav-side">
             <ul>
-                <li><span><i class="fa-solid fa-house"></i></span><a href="halaman_dashboard_admin.php"
-                        id="dashboardMenu">Dashboard Admin</a></li>
-                <li><span><i class="fa-solid fa-notes-medical"></i></span><a href="halaman_databarang.php">Log Obat</a>
-                </li>
-                <li><span><i class="fa-regular fa-money-bill-1"></i></span><a href="halaman_datapenjualan.php">Log
-                        Penjualan</a></li>
-                <li><span><i class="fa-solid fa-people-arrows"></i></span><a href="halaman_dataperusahaan.php">Log
-                        Perusahaan</a></li>
-                <li><span><i class="fa-solid fa-user"></i></span><a href="halaman_datapegawai.php">Data Pegawai</a></li>
-                <li><span><i class="fa-solid fa-notes-medical"></i></span><a href="halaman_databarangkeluar.php">Log
-                        Barang Keluar</a></li>
-                <li><span><i class="fa-solid fa-power-off"></i></span><a href="login_proses/logout_proses.php"
-                        onclick="return confirm('Apakah anda yakin ingin keluar?')">Keluar</a>
-                </li>
+                <ul>
+                    <li><span><i class="fa-solid fa-house"></i></span><a href="halaman_dashboard_admin.php"
+                            id="dashboardMenu">Dashboard</a></li>
+                    <li><span><i class="fa-solid fa-user"></i></span><a href="halaman_datapegawai.php">Data Pegawai</a>
+                    </li>
+                    <li><span><i class="fa-solid fa-power-off"></i></span><a href="login_proses/logout_proses.php"
+                            onclick="return confirm('Apakah anda yakin ingin keluar?')">Keluar</a>
+                    </li>
+                </ul>
             </ul>
         </div>
         <!-- Content start -->

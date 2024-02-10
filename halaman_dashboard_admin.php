@@ -7,8 +7,6 @@ if (!isset($_SESSION["login_admin"])) {
     exit;
 }
 
-
-// var_dump($_SESSION["user_pegawai"]);
 ?>
 <?php
 $dataPoints = array(
@@ -63,6 +61,33 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
     $count++;
 }
 ?>
+
+<!-- Graph obat keluar -->
+
+<?php
+$dataPoints = array(
+    array("y" => 3373.64, "label" => "Germany"),
+    array("y" => 2435.94, "label" => "France"),
+    array("y" => 1842.55, "label" => "China"),
+    array("y" => 1828.55, "label" => "Russia"),
+    array("y" => 1039.99, "label" => "Switzerland"),
+    array("y" => 765.215, "label" => "Japan"),
+    array("y" => 612.453, "label" => "Netherlands")
+);
+
+$graphArrayBarangKeluar = array();
+$count = 0;
+
+$takePenjualan = mysqli_query($conn, "SELECT databarangkeluar_nama, SUM(databarangkeluar_stockKeluar) as totalStockKeluar
+                                      FROM dataobatkeluar_tb
+                                      GROUP BY databarangkeluar_nama");
+
+while ($rows = mysqli_fetch_array($takePenjualan)) {
+    $graphArrayBarangKeluar[$count]["label"] = $rows["databarangkeluar_nama"];
+    $graphArrayBarangKeluar[$count]["y"] = $rows["totalStockKeluar"];
+    $count++;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,8 +125,20 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                 }]
             });
 
+            var chartKeluar = new CanvasJS.Chart("graphObatKeluar", {
+                title: {
+                    text: "Total Barang Keluar"
+                },
+                data: [{
+                    type: "column",
+                    dataPoints: <?php echo json_encode(array_values($graphArrayBarangKeluar), JSON_NUMERIC_CHECK); ?>
+                }]
+
+            });
+
             chartBarang.render();
             chart.render();
+            chartKeluar.render();
         };
 
     </script>
@@ -142,7 +179,7 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
         </div>
     </nav>
     <div class="container">
-        <div class="dashboard-container" style="height: 200vh;">
+        <div class="dashboard-container" style="height: 150vh;">
             <div class="dashboard-header-container">
                 <div class="dashboard-text">
                     <div class="text-logo">
@@ -273,10 +310,10 @@ while ($rows = mysqli_fetch_array($takePenjualan)) {
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div id="graphObat" style="height: 200px; width: auto;"></div>
-            <div id="chartContainer" style="height: 200px; width: 95%;"></div>
+            <div id="graphObat" style="height: 200px; width: 100%;"></div>
+            <div id="chartContainer" style="height: 200px; width: 100%;"></div>
+            <div id="graphObatKeluar" style="height: 200px; width: 100%;"></div>
             <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         </div>
     </div>

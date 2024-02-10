@@ -17,18 +17,31 @@ body {
   --contentContainer-color-1: #f2f3f4;
 }
 
-nav .navbar-top {
+.navbar-top {
   position: fixed;
   top: 0;
   z-index: 99;
   width: 100%;
   background-color: var(--topNavColor);
-}
+  .nav-text-describe {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #ffffff;
+  }
 
-.navbar-top-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .navbar-top-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .nav-top-contents li {
+      display: inline;
+      padding: 20px;
+      font-size: 20px;
+      color: #ffffff;
+      margin: auto 10px;
+    }
+  }
 }
 
 .navbar-head-img {
@@ -36,11 +49,6 @@ nav .navbar-top {
 }
 .navbar-head-img img {
   width: 100px;
-}
-
-.nav-text-describer {
-  margin: auto;
-  text-align: center;
 }
 
 .nav-side {
@@ -110,6 +118,12 @@ nav .navbar-top {
 
   .container {
     margin: 108px 0 0 90px;
+  }
+
+  #graphObat,
+  #chartContainer,
+  #graphObatKeluar {
+    width: 100%;
   }
 }
 
